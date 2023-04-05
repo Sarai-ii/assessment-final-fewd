@@ -1,0 +1,42 @@
+body {
+    background-color: lavender;
+    font-family: monospace;
+}
+
+header {
+    background: skyblue;
+    height: auto;
+    width: 75%;
+}
+
+header img{
+    height: 100%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media screen and (width <= 500px) {
+    #reviews {
+    display: none;
+    }
+}
+
+@media (width > 500px) {
+    #reviews {
+    display: block;
+    }
+}
+
+
