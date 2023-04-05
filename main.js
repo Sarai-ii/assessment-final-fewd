@@ -23,8 +23,8 @@ const movies = data
 // selectMenu.title
     populateSelectMovie(data)
 
-// Movie Selector
 
+// Movie Selector
 selectMenu.addEventListener("change", (event) =>{
     for (const movie of movies) {
         if(movie.id === selectMenu.value)
@@ -33,6 +33,7 @@ selectMenu.addEventListener("change", (event) =>{
             <p>${movie.description}</p>`
     }
 })
+
 // Reviews
 submitButton.addEventListener ("click", (event) => {
     event.preventDefault()
@@ -48,42 +49,53 @@ submitButton.addEventListener ("click", (event) => {
             window.alert("Please select a movie first")
         }
     form.reset()
-
 }) 
+
+//Reset Reviews
 resetButton.addEventListener("click", event => {
     event.preventDefault()
     reviewList.innerHTML = ""
     console.log(reviews)
 })
 
+//Show People Button
+CastButton.addEventListener("click", event => {
+    // event.preventDefault()
+        movies.forEach(movie => { //for each is how we get each individual element without having to use [index]
+        let peeps = movie.people
+        
+        if(movie.id === selectMenu.value){
+            console.log("button working")
+            // console.log(movie.title)
+            // console.log(peeps.includes('/people/'))
+            if(peeps.includes('/people/')){
+                const cast = document.createElement("li")
+                cast.innerHTML = `No Cast Found in the API`
+                castList.append(cast)
+            }else {
+                console.log("else working")
+                console.log(peeps)
+                peeps.map(pUrl => {
+                    fetch(`https://resource-ghibli-api.onrender.com${pUrl}`)
+                    .then(response => response.json())
+                    .then(data => { 
+                        
+                        console.log('fetch working')
+                        const cast = document.createElement("li")
+                        cast.innerHTML = `${data.name}`
+                        castList.append(cast)
+                    }) 
+
+                    .catch (whateverYouWant => {console.log(whateverYouWant)})
+                })
+            }   
+        }
+    })
+})
 
 })
 .catch(error => {console.log(error)})
-CastButton.addEventListener("click", event => {
-    event.preventDefault()
-    for (const movie of movieList) {
-        if(movie.title === selectMenu.value){
-            console.log("if working")
-            if(movie.people.includes("/people/")){
-                let cast = document.createElement("li")
-                cast.innerHTML = `No Cast Found In This Api`
-                castList.append(cast)
-            } else {
-                movie.people.forEach(castP => {
-                    fetch(`https://resource-ghibli-api.onrender.com${castP}`)
-                    .then(response => response.json())
-                    .then(data => {
-                        console.log(data.name)
-                        let cast = document.createElement("li")
-                        cast.innerHTML = `${data.name}`
-                        castList.append(cast)
-                    })
-                })
-            }
 
-        }
-    }
-})
 
 let populateSelectMovie = movies => {
     movieList.push(movies)
