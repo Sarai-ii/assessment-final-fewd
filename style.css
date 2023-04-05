@@ -16,13 +16,19 @@ body {
 
 header {
     background: skyblue;
+    display: flex;
     height: auto;
     /* width: 75%; */
 }
 
+header h1 {
+    display: inline;
+    margin: 0 0 0 70%;
+}
+
 header img{
     height: 100%;
-    width: auto;
+    width: 15%;
 }
 
 
