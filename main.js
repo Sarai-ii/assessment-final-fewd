@@ -44,7 +44,11 @@ submitButton.addEventListener ("click", (event) => {
                 reviewList.append(newReview)
             }
         }
+        if(selectMenu.value === ""){
+            window.alert("Please select a movie first")
+        }
     form.reset()
+
 }) 
 resetButton.addEventListener("click", event => {
     event.preventDefault()

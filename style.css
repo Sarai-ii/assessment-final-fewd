@@ -1,3 +1,9 @@
+@media screen and (width <= 500px) {
+    #reviews {
+        display: none;
+    }
+}
+
 body {
     background-color: lavender;
     font-family: monospace;
@@ -6,32 +12,14 @@ body {
 header {
     background: skyblue;
     height: auto;
-    width: 75%;
+    /* width: 75%; */
 }
 
 header img{
     height: 100%;
+    width: auto;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-@media screen and (width <= 500px) {
-    #reviews {
-    display: none;
-    }
-}
 
 @media (width > 500px) {
     #reviews {
