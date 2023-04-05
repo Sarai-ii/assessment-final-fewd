@@ -38,6 +38,12 @@ selectMenu.addEventListener("change", (event) =>{
 submitButton.addEventListener ("click", (event) => {
     event.preventDefault()
     let review = reviewInput.value
+    if (!review){
+        reviewList.innerHTML = ""
+        let empty = document.createElement("li")
+        empty.innerHTML = `No Review Added`
+        reviewList.append(empty)
+    } else {
         for (const movie of movies) {
             if(movie.id === selectMenu.value){
                 let newReview = document.createElement("li")
@@ -45,9 +51,10 @@ submitButton.addEventListener ("click", (event) => {
                 reviewList.append(newReview)
             }
         }
-        if(selectMenu.value === ""){
-            window.alert("Please select a movie first")
-        }
+    }
+    if(selectMenu.value === ""){
+         window.alert("Please select a movie first")
+    }
     form.reset()
 }) 
 
