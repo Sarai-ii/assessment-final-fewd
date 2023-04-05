@@ -3,6 +3,11 @@
         display: none;
     }
 }
+@media (width > 500px) {
+    #reviews {
+    display: block;
+    }
+}
 
 body {
     background-color: lavender;
@@ -21,10 +26,6 @@ header img{
 }
 
 
-@media (width > 500px) {
-    #reviews {
-    display: block;
-    }
-}
+
 
 

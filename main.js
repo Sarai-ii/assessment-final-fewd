@@ -63,16 +63,17 @@ CastButton.addEventListener("click", event => {
     // event.preventDefault()
         movies.forEach(movie => { //for each is how we get each individual element without having to use [index]
         let peeps = movie.people
-        
         if(movie.id === selectMenu.value){
             console.log("button working")
             // console.log(movie.title)
             // console.log(peeps.includes('/people/'))
             if(peeps.includes('/people/')){
+                castList.innerHTML = ""
                 const cast = document.createElement("li")
                 cast.innerHTML = `No Cast Found in the API`
                 castList.append(cast)
             }else {
+                castList.innerHTML = ""
                 console.log("else working")
                 console.log(peeps)
                 peeps.map(pUrl => {
