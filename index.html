@@ -10,13 +10,13 @@
 </head>
 <body>
     <header>
-        <img src="./images/ghibli-logo.png" alt="">
+        <img src="./images/ghibli-logo.png" alt="Ghibli logo">
         <h1>Ghibli Review App</h1>
 	</header>
 	<main>
 		<section>
 			<h2>Select a movie</h2>
-			<select id="titles">
+			<select type="box" id="titles" required>
 				<option value=""></option>
 			</select>
 		</section>
@@ -24,8 +24,8 @@
 			<h2>Add a review</h2>
 			<form>
 				<label for="review">Your review</label>
-				<br><input id="review" type="text" >
-				<input type="submit" value="Submit">
+				<br><input id="review" type="text" required>
+				<input id="review-submit"type="submit" value="Submit">
 			</form>
 		</section>
 		<section>

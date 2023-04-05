@@ -1,12 +1,16 @@
 const selectMenu = document.querySelector("#titles")
 const options = document.querySelector("option")
 const displayInfo = document.querySelector("#display-info")
-const submitButton = document.getElementById("input")
+// review
+const submitButton = document.querySelector("#review-submit")
 const reviewList = document.querySelector("#review-list")
-
-
-
-
+const form = document.querySelector("form")
+const reviewInput = document.getElementById("review")
+const resetButton = document.querySelector("#reset-reviews")
+// people
+const castList = document.getElementById("people")
+const CastButton = document.getElementById("show-people")
+let movieList = []
 
 // To ensure Cypress tests work as expeded, add any code/functions that you would like to run on page load inside this function
 
@@ -15,35 +19,56 @@ fetch("https://resource-ghibli-api.onrender.com/films/")
 .then((response) => response.json())
 .then((data) => {
 const movies = data
-let currentMovie = null
+// let currentMovie = null
+// selectMenu.title
     populateSelectMovie(data)
-   
-    selectMenu.addEventListener("change", (event) =>{
 
-        for (const movie of movies) {
-            if(movie.id === selectMenu.value)
+// Movie Selector
+
+selectMenu.addEventListener("change", (event) =>{
+    for (const movie of movies) {
+        if(movie.id === selectMenu.value)
             displayInfo.innerHTML= ` <h3>${movie.title}</h3>
             <p>${movie.release_date}</p>
             <p>${movie.description}</p>`
-        }
-    })
-
-
-submitButton.addEventListener ("click", (event) =>{
-
-    event.preventDefault()
-    let newReview = document.createElement("li")
-    newReview.innerHTML += `<strong>${currentMovie.title}</strong>` + " -- "
-    newReview.innerHTML += commentInput.value
-    commentList.append(newReview)
-
+    }
 })
+// Reviews
+submitButton.addEventListener ("click", (event) => {
+    event.preventDefault()
+    let review = reviewInput.value
+        for (const movie of movies) {
+            if(movie.id === selectMenu.value){
+                let newReview = document.createElement("li")
+                newReview.innerHTML = `<strong>${movie.title}: </strong>${review}`
+                reviewList.append(newReview)
+            }
+        }
+    form.reset()
+}) 
+resetButton.addEventListener("click", event => {
+    event.preventDefault()
+    reviewList.innerHTML = ""
+    console.log(reviews)
+})
+CastButton.addEventListener("click", event => {
+    event.preventDefault()
+    for (const movie of movieList) {
+        if(movie.id === selectMenu.value){
+            const cast = document.createElement("li")
+            cast.innerHTML = `wtf`
+            console.log(movie.people)
+        }
+    }
+})
+
 
 })
 .catch(error => {console.log(error)})
 
 
 let populateSelectMovie = movies => {
+    movieList.push(movies)
     movies.forEach(movie => {
         let newOption = document.createElement("option")
         newOption.value = movie.id
@@ -51,13 +76,6 @@ let populateSelectMovie = movies => {
         selectMenu.append(newOption)
     })
 }
-
-
-
-
-
-
-
 }
 
 // This function will "pause" the functionality expected on load long enough to allow Cypress to fully load
