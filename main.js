@@ -51,21 +51,35 @@ resetButton.addEventListener("click", event => {
     reviewList.innerHTML = ""
     console.log(reviews)
 })
-CastButton.addEventListener("click", event => {
-    event.preventDefault()
-    for (const movie of movieList) {
-        if(movie.id === selectMenu.value){
-            const cast = document.createElement("li")
-            cast.innerHTML = `wtf`
-            console.log(movie.people)
-        }
-    }
-})
 
 
 })
 .catch(error => {console.log(error)})
+CastButton.addEventListener("click", event => {
+    event.preventDefault()
+    for (const movie of movieList) {
+        if(movie.title === selectMenu.value){
+            console.log("if working")
+            if(movie.people.includes("/people/")){
+                let cast = document.createElement("li")
+                cast.innerHTML = `No Cast Found In This Api`
+                castList.append(cast)
+            } else {
+                movie.people.forEach(castP => {
+                    fetch(`https://resource-ghibli-api.onrender.com${castP}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log(data.name)
+                        let cast = document.createElement("li")
+                        cast.innerHTML = `${data.name}`
+                        castList.append(cast)
+                    })
+                })
+            }
 
+        }
+    }
+})
 
 let populateSelectMovie = movies => {
     movieList.push(movies)
